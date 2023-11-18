@@ -1,0 +1,19 @@
+package org.example.util;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class JsonSerializer<T> {
+    public String toJson(T object) {
+        ObjectMapper objectMapper=new ObjectMapper();
+        String json;
+        try {
+            json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
+            return json;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+}
