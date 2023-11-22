@@ -3,15 +3,17 @@ package org.example.entity;
 import org.example.enums.AccountStatus;
 import org.example.enums.AccountType;
 
-public class BankAccount {
+public class BankAccount implements Cloneable{
     private Long accountId;private double balance;private String currency;private AccountType accountType;private AccountStatus accountStatus;
+    private Customer customer;
 
-    public BankAccount(Long accountId, double balance, String currency, AccountType accountType, AccountStatus accountStatus) {
+    public BankAccount(Long accountId, double balance, String currency, AccountType accountType, AccountStatus accountStatus, Customer customer) {
         this.accountId = accountId;
         this.balance = balance;
         this.currency = currency;
         this.accountType = accountType;
         this.accountStatus = accountStatus;
+        this.customer = customer;
     }
 
     public BankAccount() {
@@ -46,6 +48,15 @@ public class BankAccount {
     public void setAccountStatus(AccountStatus accountStatus) {
         this.accountStatus = accountStatus;
     }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     @Override
     public String toString() {
         return "BankAccount{" +
@@ -54,8 +65,10 @@ public class BankAccount {
                 ", currency='" + currency + '\'' +
                 ", accountType=" + accountType +
                 ", accountStatus=" + accountStatus +
+                ", customer=" + customer +
                 '}';
     }
+
 
     //maintenant cette methode est optionnelle
     public static AccountBuilder builder(){
@@ -88,5 +101,12 @@ public class BankAccount {
             return  this.bankAccount;
         }
 
+    }
+
+    @Override
+    public BankAccount clone() throws CloneNotSupportedException {
+        BankAccount bankAccount= (BankAccount) super.clone();
+        bankAccount.setCustomer(this.customer.clone());
+        return bankAccount;
     }
 }

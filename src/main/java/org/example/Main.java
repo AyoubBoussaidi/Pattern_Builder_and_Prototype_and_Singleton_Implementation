@@ -29,11 +29,6 @@ public class Main {
                 .map(account -> bankAccountJsonSerializer.toJson(account))
                 .forEach(System.out::println);
 
-
-
-
-
-
         /*
         System.out.println("===================");
         BankAccount account = bankAccountrepository.findById(1L).orElse(null);
